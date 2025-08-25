@@ -1,0 +1,22 @@
+Start time: 2025-08-25 10:06:42.769274
+Model: ContrastiveTransformer
+Model parameters:
+  num_features: 4
+  input_length: 300
+  d_model: 128
+  nhead: 8
+  num_layers: 6
+  d_rep: 64
+  dim_feedforward: 512
+  dropout: 0.1
+Training parameters:
+  batch_size: 8
+  num_epochs: 1
+  learning_rate: 0.0001
+  loss_temperature: 0.1
+Train dataset size: 1024
+Eval dataset size: 15
+Validation num_emitters: 5
+Validation num_signals_per_emitter: 3
+epoch,loss,avg_sim,homogeneity,completeness,ARI,AMI,num_clusters
+1,0.597040,0.878884,1.000000,0.000000,0.000000,0.000000,3

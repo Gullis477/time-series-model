@@ -45,3 +45,44 @@ def create_data(
     signals = signals_array.tolist()
 
     return signals
+
+
+def scale_data(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Scales specific columns in a DataFrame to the [-1, 1] range
+    using predetermined min and max values.
+
+    Args:
+        df (pd.DataFrame): A DataFrame containing the 'freq', 'pw', 'bw',
+                        and 'pri' columns.
+
+    Returns:
+        pd.DataFrame: A new DataFrame with the specified columns scaled.
+                    Values outside the original range will result in
+                    scaled values outside of [-1, 1].
+    """
+
+    freq_min, freq_max = 3.5e9, 18.5e9
+    pri_min, pri_max = 10e-6, 600e-6
+    pw_min, pw_max = 2e-7, 1e-4
+    bw_min, bw_max = 1 / pw_max, 1000 / pri_min
+
+    df_scaled = df.copy()
+
+    def min_max_scale(series, min_val, max_val):
+        return (series - min_val) / (max_val - min_val) * 2 - 1
+
+    df_scaled["freq"] = min_max_scale(df_scaled["freq"], freq_min, freq_max)
+    df_scaled["pw"] = min_max_scale(df_scaled["pw"], pw_min, pw_max)
+    df_scaled["bw"] = min_max_scale(df_scaled["bw"], bw_min, bw_max)
+    df_scaled["pri"] = min_max_scale(df_scaled["pri"], pri_min, pri_max)
+
+    return df_scaled
+
+
+if __name__ == "__main__":
+    signals = create_data(42, 9, 1)
+    test_df = signals[0][0]
+
+    scaled_df = scale_data(test_df)
+    print(scaled_df.describe())
