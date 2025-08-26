@@ -19,10 +19,11 @@ class ContrastiveSignalDataset(Dataset):
             pw_min, pw_max = 2e-7, 1e-4
             bw_min, bw_max = 1 / pw_max, 1000 / pri_min
 
-            values[:, 0] = (values[:, 0] - fc_min) / (fc_max - fc_min)
-            values[:, 1] = (values[:, 1] - pw_min) / (pw_max - pw_min)
-            values[:, 2] = (values[:, 2] - bw_min) / (bw_max - bw_min)
-            values[:, 3] = (values[:, 3] - pri_min) / (pri_max - pri_min)
+            # Uppdaterad scaling till intervallet [-1, 1]
+            values[:, 0] = 2 * ((values[:, 0] - fc_min) / (fc_max - fc_min)) - 1
+            values[:, 1] = 2 * ((values[:, 1] - pw_min) / (pw_max - pw_min)) - 1
+            values[:, 2] = 2 * ((values[:, 2] - bw_min) / (bw_max - bw_min)) - 1
+            values[:, 3] = 2 * ((values[:, 3] - pri_min) / (pri_max - pri_min)) - 1
 
         elif self.norm_mode == "zscore":
             mean = values.mean(axis=0)
