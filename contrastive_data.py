@@ -76,7 +76,7 @@ class ContrastiveSignalDataset(Dataset):
         x_clean, mask_clean = self.pad_or_clip(signal_clean)
         x_noise, mask_noise = self.pad_or_clip(signal_noise)
 
-        return x_clean, mask_clean, x_noise, mask_noise, str(emitter.id)
+        return x_clean, mask_clean, x_noise, mask_noise, emitter.id
 
     def __len__(self):
         return self.n_samples
