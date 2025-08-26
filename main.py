@@ -29,8 +29,8 @@ if __name__ == "__main__":
     train_loader = DataLoader(dataset_train, batch_size=32, shuffle=True, num_workers=1)
 
     val_emitters = []
-    for _ in range(5):
-        emitter = build_emitter()
+    for i in range(5):
+        emitter = build_emitter(emitter_id=i)
         for _ in range(5):
             deep_copy_emitter = deepcopy(emitter)
             val_emitters.append(deep_copy_emitter)
