@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import math
+import torch.nn.functional as F
 
 
 class PositionalEncoding(nn.Module):
@@ -92,4 +93,7 @@ class ContrastiveTransformer(nn.Module):
 
         # 6. Returnera representationen från [CLS] token
         cls_output = x[:, 0]
+
+        cls_output = F.normalize(cls_output, dim=1)
+
         return cls_output
