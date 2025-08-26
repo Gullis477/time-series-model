@@ -112,7 +112,7 @@ if __name__ == "__main__":
 
             # Använd din likhetsbaserade klustringsfunktion
             # Ett fast tröskelvärde är satt för demonstration
-            threshold = 0.8
+            threshold = (1 - avg_pos_dist) * 0.9
             metrics = cluster_by_similarity(representations, true_labels, threshold)
 
             print(
