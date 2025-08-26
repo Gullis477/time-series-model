@@ -96,7 +96,7 @@ def cluster_by_similarity(
     comp = completeness_score(y_true, y_pred)
     ari = adjusted_rand_score(y_true, y_pred)
     ami = adjusted_mutual_info_score(y_true, y_pred)
-
+    print(y_true)
     return {
         "homogeneity": hom,
         "completeness": comp,

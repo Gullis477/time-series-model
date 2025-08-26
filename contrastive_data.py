@@ -4,7 +4,8 @@ import numpy as np
 
 
 class ContrastiveSignalDataset(Dataset):
-    def __init__(self, emitters, max_length=300, norm_mode="zscore"):
+
+    def __init__(self, emitters, max_length=300, norm_mode="physical"):
         self.emitters = emitters
         self.n_samples = len(emitters)
         self.max_length = max_length
